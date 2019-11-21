@@ -214,7 +214,7 @@ def proof_of_work(last_proof, leading_zeros):
     start = timer()
 
     print("Searching for next proof")
-    proof = random.random()
+    proof = random.randint(0, 10000000)
     print(f'starting proof:{proof}')
     while valid_proof(last_proof, proof, leading_zeros) is False:
 
