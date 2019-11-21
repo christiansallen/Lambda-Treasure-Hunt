@@ -101,18 +101,17 @@ def get_last_proof():
 
     if status_code is not 200:
         return ('Unsuccessful Connection, Status Code:', status_code)
-    print(response.json())
     return response.json()
 
 
 def mine(proof):
+    print(f'proof:{proof}')
     response = requests.post(
-        url_base[:-4] + 'bc/mine', headers=headers, json={'proof': proof})
+        url_base[:-4] + 'bc/mine', headers=headers, json=proof)
     status_code = response.status_code
 
     if status_code is not 200:
         return ('Unsuccessful Connection, Status Code:', status_code)
-    print(response.json())
     return response.json()
 
 

@@ -36,18 +36,18 @@ coins_mined = 0
 # print('Moving to mine')
 # data = move_to_location(data['room_id'], mine_location, data, map)
 # print('In the mine')
-data = get_last_proof()
-proof = data['proof']
-leading_zeros = data['difficulty']
+message = []
+response = {'cooldown': -1}
+while message == []:
+    sleep(response['cooldown']+1)
+    data = get_last_proof()
+    proof = data['proof']
+    leading_zeros = data['difficulty']
 
-while True:
-    new_proof = proof_of_work(proof, leading_zeros)
-    post_data = {"proof": new_proof}
-    mine(post_data)
-    if data['errors'] == []:
-        coins_mined += 1
-        print("Total coins mined: " + str(coins_mined))
-    else:
-        print(data)
-
-print(get_balance())
+    while True:
+        new_proof = proof_of_work(proof, leading_zeros)
+        response = mine(new_proof)  # DICTIONARY
+        print(response)
+        message = response['messages']
+        sleep(response["cooldown"] + 1)
+        print(get_balance())
